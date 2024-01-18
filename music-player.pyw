@@ -37,6 +37,7 @@ try:
     from vlc import MediaPlayer, Media as vlcMedia
     from numpy import array as nparray
     from tinytag import TinyTag
+    from CTkToolTip import CTkToolTip
 except ImportError as importError:
     ModuleNotFound = str(importError).split("'")[1]
     usr_choice = askyesno(title="Import error", message=f"An error occurred while importing '{ModuleNotFound}'.\nWould you like to run the setup.bat script?")
@@ -70,7 +71,6 @@ class MusicManager:
         self.updating = False
         self.event_loop_running = False
         self.player = MediaPlayer()
-        # self.player.audio_set_volume(int(settings["MusicSettings"]["Volume"]))
         self.player.audio_set_volume(musicVolumeVar.get())
 
     def cleanup(self):
@@ -290,6 +290,7 @@ class MusicManager:
             next_song_btn.configure(state="normal")
             volume_slider.configure(state="normal")
             music_dir_label.configure(text=f"Music Directory: {shorten_path(MusicDir, 25)}" if MusicDir != "" else "Music Directory: None")
+            music_dir_tooltip.configure(message=f"Reading music from: {MusicDir}" if MusicDir != "" else "Reading music from: no directory selected")
 
             if settings["MusicSettings"]["CurrentlyPlaying"] == True:
                 self.play()
@@ -631,6 +632,18 @@ time_left_label.grid(row=1, column=0, padx=10, pady=0, sticky="w")
 song_progressbar.grid(row=1, column=1, padx=10, pady=0, sticky="ew")
 total_time_label.grid(row=1, column=2, padx=10, pady=0, sticky="e")
 music_progress_frame.grid_columnconfigure(1, weight=1)
+
+
+# Creating all tooltips
+music_dir_tooltip = CTkToolTip(music_dir_label, message=f"Reading music from: {settings['MusicSettings']['MusicDir']}" if settings['MusicSettings']['MusicDir'] != "" else "Reading music from: no directory selected")
+CTkToolTip(update_music_list, message="Refresh the music list")
+CTkToolTip(change_music_dir, message="Change the directory where the music is read from")
+CTkToolTip(stop_song_btn, message="Stops the current song, resets the player, and releases the media")
+CTkToolTip(pre_song_btn, message="Plays the previous song")
+CTkToolTip(play_pause_song_btn, message="Plays or pauses the current song")
+CTkToolTip(next_song_btn, message="Plays the next song")
+CTkToolTip(loop_playlist_btn, message="Loops the current song or the whole playlist (keep in mind the 'playlist' is the whole music directory)")
+CTkToolTip(volume_slider, message="Sets the volume of the music player")
 
 
 # initialize and start the MusicManager
