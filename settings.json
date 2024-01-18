@@ -1,0 +1,16 @@
+{
+  "MusicSettings": {
+    "MusicDir": "C:/Users/david/Music",
+    "Volume": 0,
+    "CurrentlyPlaying": false,
+    "LoopState": "all"
+  },
+  "AppSettings": {
+    "AlwaysOnTop": false,
+    "Window_State": "normal",
+    "Window_Width": 938,
+    "Window_Height": 525,
+    "Window_X": 811,
+    "Window_Y": 370
+  }
+}
