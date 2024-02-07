@@ -45,8 +45,6 @@ except ImportError as importError:
         system("setup.bat")
     sys.exit()
 
-# Minimizes console window that launches with .py files if you want to use this app as a .py instead of a .pyw file
-# ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 6)
 
 # Sets the appearance mode of the window to dark 
 # (in simpler terms, sets the window to dark mode).
@@ -652,11 +650,3 @@ music_manager.start_event_loop()
 
 
 window.mainloop()
-
-
-
-
-# settingsAlwayOnTopswitch = CTkSwitch(settingsgrid, text="", variable=settingsAlwayOnTopVar, onvalue=True, offvalue=False, font=("sans-serif", 22), command=AlwaysOnTopTrueFalse)
-# settingsAlwayOnToplabel = CTkLabel(settingsgrid, text="Always on top", font=("sans-serif", 22))
-# settingsAlwayOnTopswitch.grid(row=1, column=1, pady=5, sticky="e")
-# settingsAlwayOnToplabel.grid(row=1, column=2, pady=5, sticky="w")
