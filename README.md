@@ -1,7 +1,8 @@
 # music-player
 
 
-When creating this app, i ran into the following errors:
+When creating this app, i ran into the following errors (can only be seen from terminal output but will slowdown startup times by 3-5 seconds): \
+```bash
 [000002b64bb7dd80] main libvlc error: stale plugins cache: modified C:\Program Files\VideoLAN\VLC\plugins\access\libaccess_concat_plugin.dll
 [000002b64bb7dd80] main libvlc error: stale plugins cache: modified C:\Program Files\VideoLAN\VLC\plugins\access\libaccess_imem_plugin.dll
 [000002b64bb7dd80] main libvlc error: stale plugins cache: modified C:\Program Files\VideoLAN\VLC\plugins\access\libaccess_mms_plugin.dll
@@ -25,6 +26,7 @@ When creating this app, i ran into the following errors:
 [000002b64bb7dd80] main libvlc error: stale plugins cache: modified C:\Program Files\VideoLAN\VLC\plugins\access\liblive555_plugin.dll
 [000002b64bb7dd80] main libvlc error: stale plugins cache: modified C:\Program Files\VideoLAN\VLC\plugins\access\libnfs_plugin.dll
 ...
+```
 
 So the way i found to fix this was to run the following command in a admin terminal:
 `"C:\Program Files\VideoLAN\VLC\vlc-cache-gen.exe" "C:\Program Files\VideoLAN\VLC\plugins"`
