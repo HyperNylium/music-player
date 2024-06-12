@@ -317,11 +317,11 @@ class MusicManager:
 def StartUp():
     """Main function that gets the app going. Should be called only once at the start of the app"""
 
-    # try:
-    #     window.iconbitmap("assets/AppIcon/Management_Panel_Icon.ico")
-    # except Exception as e:
-    #     showerror(title="Error loading window icon", message=f"An error occurred while loading the window icon\n{e}")
-    #     sys.exit()
+    try:
+        window.iconbitmap("assets/AppIcon/music-player-icon.ico")
+    except Exception as e:
+        showerror(title="Error loading window icon", message=f"An error occurred while loading the window icon\n{e}")
+        sys.exit()
 
     global settings, musicVolumeVar, music_manager, settingsAlwayOnTopVar
 
