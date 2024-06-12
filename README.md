@@ -1,6 +1,11 @@
 # music-player
+## A simple music player using python and vlc
 
+### Requirements
+- Python 3.8 or higher
+- VLC Media Player installed on your system
 
+### Troubleshooting
 When creating this app, i ran into the following errors (can only be seen from terminal output but will slowdown startup times by 3-5 seconds):
 ```bash
 [000002b64bb7dd80] main libvlc error: stale plugins cache: modified C:\Program Files\VideoLAN\VLC\plugins\access\libaccess_concat_plugin.dll
