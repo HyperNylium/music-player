@@ -3,7 +3,7 @@
 
 ### Requirements
 - Python 3.8 or higher
-- VLC Media Player installed on your system
+- [VLC Media Player](https://www.videolan.org/) installed on your system
 
 ### Troubleshooting
 When creating this app, i ran into the following errors (can only be seen from terminal output but will slowdown startup times by 3-5 seconds):
