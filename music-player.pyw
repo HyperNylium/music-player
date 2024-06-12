@@ -137,6 +137,9 @@ class MusicManager:
         if self.player.get_media():
             self.player.get_media().release()
 
+        if not self.updating:
+            SaveSettingsToJson("CurrentlyPlaying", False)
+
         self.current_song_index = 0
         self.current_song_paused = False
         self.has_started_before = False
@@ -519,6 +522,7 @@ def file_path():
 window = CTk()
 window.title("Music Player")
 window.protocol("WM_DELETE_WINDOW", on_closing)
+window.minsize(520, 370)
 screen_scale = window._get_window_scaling()
 StartUp()
 
