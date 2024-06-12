@@ -29,5 +29,7 @@ When creating this app, i ran into the following errors (can only be seen from t
 ```
 
 So the way i found to fix this was to run the following command in a admin terminal:
-`"C:\Program Files\VideoLAN\VLC\vlc-cache-gen.exe" "C:\Program Files\VideoLAN\VLC\plugins"`
+```bash
+"C:\Program Files\VideoLAN\VLC\vlc-cache-gen.exe" "C:\Program Files\VideoLAN\VLC\plugins"
+```
 > https://stackoverflow.com/questions/68246840/how-to-avoid-main-libvlc-error-when-using-the-python-vlc-package
