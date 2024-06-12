@@ -276,8 +276,6 @@ class MusicManager:
                 self.music_dir_exists = False
                 self.song_list = []
                 all_music_frame.configure(label_text="Please choose a valid music directory by clicking the 'Change' button")
-                SaveSettingsToJson("MusicDir", "")
-                MusicDir = ""
 
             Thread(target=self.update_all_music_frame, daemon=True, name="update_all_music_frame").start()
 
