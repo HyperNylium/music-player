@@ -12,11 +12,11 @@
 # Imports
 from os import system, execl, listdir
 from os.path import exists, join, splitext, expanduser, abspath, splitdrive
-from tkinter.messagebox import showerror, askyesno
 from tkinter import BooleanVar, IntVar
+from tkinter.filedialog import askdirectory
+from tkinter.messagebox import showerror, askyesno
 from json import load as JSload, dump as JSdump
 from datetime import timedelta
-from tkinter.filedialog import askdirectory
 from threading import Thread
 from time import sleep
 import sys
