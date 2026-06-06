@@ -1,2 +1,21 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
 
+# Virtual environments
+.venv/
+.env
+
+# Ruff cache
+.ruff_cache/
+
+# PyInstaller build output
+build/
+dist/
+*.spec
+
+# OS junk
+.DS_Store
+
+# Runtime files
 settings.json
