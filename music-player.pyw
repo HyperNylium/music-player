@@ -1,14 +1,3 @@
-###~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-###
-### Author/Creator: HyperNylium
-###
-### Website: http://www.hypernylium.com/
-###
-### GitHub: https://github.com/HyperNylium/
-###
-### License: Mozilla Public License Version 2.0
-###~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-
 # Imports
 from os import system, execl, listdir
 from os.path import exists, join, splitext, expanduser, abspath, splitdrive
@@ -24,13 +13,13 @@ import sys
 try:
     from customtkinter import (
         CTk,
-        CTkFrame, 
-        CTkScrollableFrame, 
-        CTkLabel, 
-        CTkButton, 
-        CTkImage, 
-        CTkProgressBar, 
-        CTkSlider, 
+        CTkFrame,
+        CTkScrollableFrame,
+        CTkLabel,
+        CTkButton,
+        CTkImage,
+        CTkProgressBar,
+        CTkSlider,
         set_appearance_mode
     )
     from PIL.Image import open as PILopen, fromarray as PILfromarray
@@ -46,21 +35,21 @@ except ImportError as importError:
     sys.exit()
 
 
-# Sets the appearance mode of the window to dark 
+# Sets the appearance mode of the window to dark
 # (in simpler terms, sets the window to dark mode).
 # Don't want to burn them eyes now do we?
-set_appearance_mode("dark") 
+set_appearance_mode("dark")
 
 
-SETTINGSFILE = "settings.json" # The settings file name
-after_events = {} # dict to store after events
-prev_x = 0 # variable to store previous x coordinate of the window
-prev_y = 0 # variable to store previous y coordinate of the window
+SETTINGSFILE = "settings.json"  # The settings file name
+after_events = {}  # dict to store after events
+prev_x = 0  # variable to store previous x coordinate of the window
+prev_y = 0  # variable to store previous y coordinate of the window
 
 
 class MusicManager:
     def __init__(self):
-        self.song_info = {} # Dictionary to store song info: {"song_name"(str): {"duration"(str): duration_in_seconds(int)}}
+        self.song_info = {}  # Dictionary to store song info: {"song_name"(str): {"duration"(str): duration_in_seconds(int)}}
         self.song_list = []
         self.current_song_index = 0
         self.current_song_paused = False
@@ -77,7 +66,7 @@ class MusicManager:
         try:
             self.player.stop()
             self.player.release()
-        except:
+        except Exception as _:
             pass
         return
 
@@ -85,7 +74,7 @@ class MusicManager:
         """Event loop for the music player"""
         while self.event_loop_running:
             if self.is_playing() and not self.current_song_paused:
-                current_pos_secs = self.player.get_time() / 1000 # Get current position in seconds
+                current_pos_secs = self.player.get_time() / 1000  # Get current position in seconds
                 total_duration = self.song_info[self.get_current_playing_song()]["duration"]
                 remaining_time = total_duration - current_pos_secs
 
@@ -93,11 +82,11 @@ class MusicManager:
                 formatted_total_duration = str(timedelta(seconds=total_duration)).split(".")[0]
 
                 time_left_label.configure(text=formatted_remaining_time)
-                song_progressbar.set((current_pos_secs / total_duration))
+                song_progressbar.set(current_pos_secs / total_duration)
                 total_time_label.configure(text=formatted_total_duration)
 
                 del current_pos_secs, total_duration, remaining_time, formatted_remaining_time, formatted_total_duration
-                
+
             if not self.is_playing() and not self.current_song_paused and self.has_started_before:
                 if settings["MusicSettings"]["LoopState"] == "all":
                     self.next()
@@ -247,7 +236,7 @@ class MusicManager:
             delete_widgets.append(widget)
 
         for index, song_name in enumerate(self.song_list):
-            CTkLabel(all_music_frame, text=f"{str(index+1)}. {splitext(song_name)[0]}", font=("sans-serif", 20)).grid(
+            CTkLabel(all_music_frame, text=f"{index + 1!s}. {splitext(song_name)[0]}", font=("sans-serif", 20)).grid(
                 row=index, column=1, padx=(20, 0), pady=5, sticky="w")
 
         if len(delete_widgets) > 0:
@@ -363,22 +352,30 @@ def StartUp():
         musicVolumeVar.set(int(settings["MusicSettings"]["Volume"]))
 
     music_manager = MusicManager()
+
+
 def restart():
     """Restarts app"""
     python = sys.executable
     execl(python, python, *sys.argv)
+
+
 def on_closing():
     """App termination function"""
     SaveSettingsToJson("CurrentlyPlaying", False)
     music_manager.cleanup()
     window.destroy()
     sys.exit()
+
+
 def schedule_create(widget, ms, func, cancel_after_finished=False, *args, **kwargs):
     """Schedules a function to run after a given time in milliseconds and saves the event id in a dictionary with the function name as the key"""
     event_id = widget.after(ms, lambda: func(*args, **kwargs))
     after_events[func.__name__] = event_id
     if cancel_after_finished:
         widget.after(ms, lambda: schedule_cancel(widget, func))
+
+
 def schedule_cancel(widget, func):
     """Cancels a scheduled function and deletes the event id from the dictionary using the function name as the parameter instead of the event id"""
     try:
@@ -386,8 +383,10 @@ def schedule_cancel(widget, func):
         if event_id is not None:
             widget.after_cancel(event_id)
             del after_events[func.__name__]
-    except: 
+    except Exception as _:
         pass
+
+
 def SaveSettingsToJson(key: str, value):
     """Saves data to settings.json file"""
     for Property in ['URLs', 'GameShortcutURLs', 'OpenAISettings', 'MusicSettings', 'AppSettings']:
@@ -400,6 +399,7 @@ def SaveSettingsToJson(key: str, value):
 
     with open(SETTINGSFILE, 'w') as SettingsToWrite:
         JSdump(settings, SettingsToWrite, indent=2)
+
 
 def on_drag_end(event):
     global prev_x, prev_y
@@ -429,6 +429,8 @@ def on_drag_end(event):
         # Schedule a new threshold check after 420ms
         schedule_create(window, 420, on_drag_stopped)
     return
+
+
 def on_drag_stopped():
     if window.state() == "zoomed":
         SaveSettingsToJson("Window_State", "maximized")
@@ -440,13 +442,16 @@ def on_drag_stopped():
         SaveSettingsToJson("Window_Y", window.winfo_y())
     return
 
+
 def CenterWindowToDisplay(Screen: CTk, width: int, height: int, scale_factor: float = 1.0):
     """Centers the window to the main display/monitor"""
     screen_width = Screen.winfo_screenwidth()
     screen_height = Screen.winfo_screenheight()
-    x = int(((screen_width/2) - (width/2)) * scale_factor)
-    y = int(((screen_height/2) - (height/1.5)) * scale_factor)
+    x = int(((screen_width / 2) - (width / 2)) * scale_factor)
+    y = int(((screen_height / 2) - (height / 1.5)) * scale_factor)
     return f"{width}x{height}+{x}+{y}"
+
+
 def ResetWindowPos():
     """Resets window positions in settings.json"""
     SaveSettingsToJson("Window_State", "normal")
@@ -455,6 +460,8 @@ def ResetWindowPos():
     SaveSettingsToJson("Window_X", "")
     SaveSettingsToJson("Window_Y", "")
     restart()
+
+
 def AlwaysOnTopTrueFalse():
     """Sets the window to always be on top or not and saves the state to settings.json"""
     value = settingsAlwayOnTopVar.get()
@@ -463,12 +470,15 @@ def AlwaysOnTopTrueFalse():
     del value
     return
 
+
 def responsive_grid(frame: CTkFrame, rows: int, columns: int):
     """Makes a grid responsive for a frame"""
-    for row in range(rows+1):
+    for row in range(rows + 1):
         frame.grid_rowconfigure(row, weight=1)
-    for column in range(columns+1):
+    for column in range(columns + 1):
         frame.grid_columnconfigure(column, weight=1)
+
+
 def check_window_properties():
     """Checks if the window properties are set"""
     if (
@@ -478,16 +488,22 @@ def check_window_properties():
     ):
         return True
     return False
+
+
 def update_widget(widget, update=False, update_idletasks=False):
     """Updates a widget"""
     if update:
         widget.update()
     if update_idletasks:
         widget.update_idletasks()
+
+
 def hextorgb(new_color_hex: str):
     new_color_hex = new_color_hex.lower().lstrip('#')
-    new_color_rgb = tuple(int(new_color_hex[i:i+2], 16) for i in (0, 2, 4))
+    new_color_rgb = tuple(int(new_color_hex[i:i + 2], 16) for i in (0, 2, 4))
     return new_color_rgb
+
+
 def change_image_clr(image, hex_color: str):
     target_rgb = hextorgb(hex_color)
     image = image.convert('RGBA')
@@ -506,10 +522,14 @@ def change_image_clr(image, hex_color: str):
 
     image_with_color = PILfromarray(data)
     return image_with_color
+
+
 def shorten_path(text, max_length, replacement: str = "..."):
     if len(text) > max_length:
         return text[:max_length - 3] + replacement  # Replace the last three characters with "..."
     return text
+
+
 def file_path():
     """Gets the file path of the current file regardless of if its a .pyw file or a .exe file"""
     if getattr(sys, 'frozen', False):
@@ -518,6 +538,7 @@ def file_path():
         drive, rest_of_path = splitdrive(abspath(__file__))
         formatted_path = drive.upper() + rest_of_path
         return formatted_path
+
 
 window = CTk()
 window.title("Music Player")
@@ -537,7 +558,7 @@ if check_window_properties():
 
     if WINDOW_STATE == "maximized":
         # Thank you Akascape for helping me out (https://github.com/TomSchimansky/CustomTkinter/discussions/1819)
-        schedule_create(window, 50,  lambda: window.state('zoomed'), True)
+        schedule_create(window, 50, lambda: window.state('zoomed'), True)
 
     del WIDTH, HEIGHT, X, Y, WINDOW_STATE
 else:
