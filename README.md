@@ -2,7 +2,7 @@
 ## A simple music player using python and vlc
 
 ### Requirements
-- Python 3.8 or higher
+- Python 3.11 or higher (if running from source code)
 - [VLC Media Player](https://www.videolan.org/) installed on your system
 
 ### Troubleshooting
@@ -15,21 +15,6 @@ When creating this app, i ran into the following errors (can only be seen from t
 [000002b64bb7dd80] main libvlc error: stale plugins cache: modified C:\Program Files\VideoLAN\VLC\plugins\access\libaccess_srt_plugin.dll
 [000002b64bb7dd80] main libvlc error: stale plugins cache: modified C:\Program Files\VideoLAN\VLC\plugins\access\libaccess_wasapi_plugin.dll
 [000002b64bb7dd80] main libvlc error: stale plugins cache: modified C:\Program Files\VideoLAN\VLC\plugins\access\libattachment_plugin.dll
-[000002b64bb7dd80] main libvlc error: stale plugins cache: modified C:\Program Files\VideoLAN\VLC\plugins\access\libcdda_plugin.dll
-[000002b64bb7dd80] main libvlc error: stale plugins cache: modified C:\Program Files\VideoLAN\VLC\plugins\access\libdcp_plugin.dll
-[000002b64bb7dd80] main libvlc error: stale plugins cache: modified C:\Program Files\VideoLAN\VLC\plugins\access\libdshow_plugin.dll
-[000002b64bb7dd80] main libvlc error: stale plugins cache: modified C:\Program Files\VideoLAN\VLC\plugins\access\libdtv_plugin.dll
-[000002b64bb7dd80] main libvlc error: stale plugins cache: modified C:\Program Files\VideoLAN\VLC\plugins\access\libdvdnav_plugin.dll
-[000002b64bb7dd80] main libvlc error: stale plugins cache: modified C:\Program Files\VideoLAN\VLC\plugins\access\libdvdread_plugin.dll
-[000002b64bb7dd80] main libvlc error: stale plugins cache: modified C:\Program Files\VideoLAN\VLC\plugins\access\libfilesystem_plugin.dll
-[000002b64bb7dd80] main libvlc error: stale plugins cache: modified C:\Program Files\VideoLAN\VLC\plugins\access\libftp_plugin.dll
-[000002b64bb7dd80] main libvlc error: stale plugins cache: modified C:\Program Files\VideoLAN\VLC\plugins\access\libhttps_plugin.dll
-[000002b64bb7dd80] main libvlc error: stale plugins cache: modified C:\Program Files\VideoLAN\VLC\plugins\access\libhttp_plugin.dll
-[000002b64bb7dd80] main libvlc error: stale plugins cache: modified C:\Program Files\VideoLAN\VLC\plugins\access\libidummy_plugin.dll
-[000002b64bb7dd80] main libvlc error: stale plugins cache: modified C:\Program Files\VideoLAN\VLC\plugins\access\libimem_plugin.dll
-[000002b64bb7dd80] main libvlc error: stale plugins cache: modified C:\Program Files\VideoLAN\VLC\plugins\access\liblibbluray_plugin.dll
-[000002b64bb7dd80] main libvlc error: stale plugins cache: modified C:\Program Files\VideoLAN\VLC\plugins\access\liblive555_plugin.dll
-[000002b64bb7dd80] main libvlc error: stale plugins cache: modified C:\Program Files\VideoLAN\VLC\plugins\access\libnfs_plugin.dll
 ...
 ```
 
