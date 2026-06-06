@@ -1,0 +1,58 @@
+name: Build .exe on Release
+run-name: "Build PyInstaller exe for ${{ github.event.release.name }}"
+
+on:
+  release:
+    types: [ published ]
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-attach-exe:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v8.2.0
+        with:
+          python-version: "3.13"
+
+      - name: Build exe (onedir)
+        run: >
+          uv run pyinstaller
+          --noconfirm
+          --onedir
+          --windowed
+          --name music-player
+          --icon assets/AppIcon/music-player-icon.ico
+          --collect-all customtkinter
+          music-player.pyw
+
+      - name: Copy assets next to the exe
+        shell: pwsh
+        run: Copy-Item -Recurse -Force assets dist/music-player/assets
+
+      - name: Zip the build folder
+        shell: pwsh
+        run: Compress-Archive -Path dist/music-player -DestinationPath dist/music-player.zip -Force
+
+      - name: Create release-sha256.txt
+        shell: pwsh
+        run: |
+          $zip = "dist/music-player.zip"
+          $hash = (Get-FileHash $zip -Algorithm SHA256).Hash.ToLower()
+          "$hash  music-player.zip" | Out-File -Encoding utf8 "dist/release-sha256.txt"
+          Get-Content "dist/release-sha256.txt"
+
+      - name: Upload zip and checksum to release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ github.event.release.tag_name }}
+          files: |
+            dist/music-player.zip
+            dist/release-sha256.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
