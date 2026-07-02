@@ -7,7 +7,7 @@ dependencies = [
     "ctktooltip>=0.9",
     "customtkinter>=5.2.2",
     "numpy>=2.4.0",
-    "pillow>=12.2.0",
+    "pillow>=12.3.0",
     "python-vlc>=3.0.21203",
     "tinytag>=2.2.0",
 ]
