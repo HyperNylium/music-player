@@ -83,7 +83,7 @@ requires-dist = [
     { name = "ctktooltip", specifier = ">=0.9" },
     { name = "customtkinter", specifier = ">=5.2.2" },
     { name = "numpy", specifier = ">=2.4.0" },
-    { name = "pillow", specifier = ">=12.2.0" },
+    { name = "pillow", specifier = ">=12.3.0" },
     { name = "python-vlc", specifier = ">=3.0.21203" },
     { name = "tinytag", specifier = ">=2.2.0" },
 ]
