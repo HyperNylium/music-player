@@ -2,11 +2,11 @@
 name = "music-player"
 version = "1.0.2"
 description = "A simple music player using python and vlc"
-requires-python = ">=3.11"
+requires-python = ">=3.13"
 dependencies = [
     "ctktooltip>=0.9",
-    "customtkinter>=5.2.2",
-    "numpy>=2.4.0",
+    "customtkinter>=6.0.0",
+    "numpy>=2.5.0",
     "pillow>=12.3.0",
     "python-vlc>=3.0.21203",
     "tinytag>=2.2.0",
@@ -14,8 +14,8 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "pyinstaller>=6.20.0",
-    "ruff>=0.15.0",
+    "pyinstaller>=6.21.0",
+    "ruff>=0.16.0",
 ]
 
 [tool.uv]
